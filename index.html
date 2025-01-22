@@ -4,50 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-
     <title>MIS 60 BEATRIZ</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
-        .glitter {
-            position: absolute;
-            background-color: #ffffff;
-            border-radius: 50%;
-            opacity: 0;
-            animation: twinkle 4s infinite;
+        :root {
+            --color-gold: #D4AF37;
+            --color-gold-light: #FFD700;
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-cream: #FFFDD0;
+            --color-green: #1a4a1a;
+            --color-green-dark: #0a2a0a;
         }
 
-        @keyframes twinkle {
-            0%, 100% { 
-                opacity: 0; 
-                transform: scale(0.5) translate(10px, 10px); 
-            }
-            50% { 
-                opacity: 1; 
-                transform: scale(1) translate(-10px, -10px); 
-            }
+        body {
+            background-color: var(--color-black);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Playfair Display', serif;
+            color: var(--color-gold);
+        }
+
+        .gif-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gif-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.75);
+            border: 2px solid var(--color-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .header-title {
+            font-family: 'Great Vibes', cursive;
+            color: var(--color-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
+        }
+
+        .input-field {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+        }
+
+        .input-field::placeholder {
+            color: rgba(212, 175, 55, 0.5);
+        }
+
+        .guest-list {
+            background-color: rgba(26, 74, 26, 0.9);
+            border: 1px solid var(--color-gold);
+        }
+
+        .guest-item {
+            color: var(--color-gold);
+            transition: all 0.3s ease;
+        }
+
+        .guest-item:hover {
+            background-color: rgba(212, 175, 55, 0.2);
         }
     </style>
 </head>
-<body class="bg-black min-h-screen flex items-center justify-center p-4">
-    <div id="glitter-container" class="fixed inset-0 pointer-events-none"></div>
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative z-10">
-        <div class="flex justify-center mb-6">
-            <img src="assets/ny.jpg" alt="Logo" class="w-32 h-auto" />
-
-        </div>
-        <h2 class="text-2xl font-semibold text-center mb-6 text-black">Coloque su nombre, se le mostrará una lista y debe elegir el que corresponda</h2>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="gif-background">
+        <img src="assets/fig.gif" alt="Fondo animado">
+    </div>
+    <div class="content-overlay p-8 rounded-lg shadow-lg w-full max-w-md relative z-10">
+        
+        <h1 class="header-title text-4xl font-bold text-center mb-6">Mis 60 Beatriz</h1>
+        <h2 class="text-xl font-semibold text-center mb-6 text-gold">Coloque su nombre, se le mostrará una lista y debe elegir el que corresponda</h2>
         <div class="relative">
             <input
                 type="text"
                 id="guestInput"
-                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                class="input-field w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold"
                 placeholder="Escriba su nombre"
                 aria-label="Nombre del invitado"
                 aria-autocomplete="list"
             />
             <ul 
                 id="guestList"
-                class="absolute z-10 w-full bg-white border-gray-300 rounded-lg mt-1 max-h-60 overflow-y-auto shadow-md hidden"
+                class="guest-list absolute z-10 w-full rounded-lg mt-1 max-h-60 overflow-y-auto shadow-md hidden"
                 role="listbox"
             ></ul>
         </div>
@@ -78,7 +134,7 @@
                     filtered.forEach(guest => {
                         const li = document.createElement('li');
                         li.textContent = guest.name;
-                        li.className = 'p-2 hover:bg-green-100 cursor-pointer';
+                        li.className = 'guest-item p-3 cursor-pointer';
                         li.setAttribute('role', 'option');
                         li.addEventListener('click', () => handleSelectGuest(guest));
                         guestList.appendChild(li);
@@ -95,41 +151,8 @@
                 guestList.classList.add('hidden');
                 window.location.href = `invitacion.html?name=${encodeURIComponent(guest.name)}&guests=${guest.guests}`;
             }
-
-            // Glitter effect
-            function createGlitter() {
-                const container = document.getElementById('glitter-container');
-                const containerWidth = container.offsetWidth;
-                const containerHeight = container.offsetHeight;
-
-                container.innerHTML = '';
-
-                for (let i = 0; i < 100; i++) {
-                    createGlitterParticle(container, containerWidth, containerHeight);
-                }
-            }
-
-            function createGlitterParticle(container, containerWidth, containerHeight) {
-                const glitter = document.createElement('div');
-                glitter.classList.add('glitter');
-                
-                const size = Math.random() * 3 + 1;
-                glitter.style.width = `${size}px`;
-                glitter.style.height = `${size}px`;
-                
-                glitter.style.left = `${Math.random() * containerWidth}px`;
-                glitter.style.top = `${Math.random() * containerHeight}px`;
-                
-                const duration = Math.random() * 2 + 2;
-                glitter.style.animationDuration = `${duration}s`;
-                glitter.style.animationDelay = `${Math.random() * 4}s`;
-                
-                container.appendChild(glitter);
-            }
-
-            createGlitter();
-            window.addEventListener('resize', createGlitter);
         });
     </script>
 </body>
 </html>
+
