@@ -60,9 +60,15 @@
             font-family: 'Great Vibes', cursive;
             color: var(--color-gold);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
-            font-size: 5rem;
+            font-size: 3rem;
             line-height: 1.2;
             margin-bottom: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .header-title {
+                font-size: 5rem;
+            }
         }
 
         .countdown-item {
@@ -91,14 +97,12 @@
             font-family: 'Cinzel', serif;
             color: var(--color-gold);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            
         }
 
         .ny-text {
             color: var(--color-cream);
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
-
         }
 
         button {
@@ -167,7 +171,7 @@
             Tu navegador no soporta el elemento de audio.
         </audio>
 
-        <header class="w-full h-screen flex items-center justify-center">
+        <header class="w-full min-h-screen flex items-center justify-center px-4">
             <div class="text-center">
                 <div class="mb-8">
                     
@@ -176,22 +180,22 @@
                     Mis 60 <br> Beatriz
                 </h1>
                 <section id="countdown" class="mb-8">
-                    <div id="countdown-timer" class="flex justify-center gap-4">
+                    <div id="countdown-timer" class="grid grid-cols-2 sm:flex sm:flex-row justify-center gap-4">
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-4xl font-extrabold text-gold" id="days">0</div>
-                            <div class="text-sm font-medium uppercase mt-2 text-gold">Días</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="days">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Días</div>
                         </div>
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-4xl font-extrabold text-gold" id="hours">0</div>
-                            <div class="text-sm font-medium uppercase mt-2 text-gold">Horas</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="hours">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Horas</div>
                         </div>
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-4xl font-extrabold text-gold" id="minutes">0</div>
-                            <div class="text-sm font-medium uppercase mt-2 text-gold">Minutos</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="minutes">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Minutos</div>
                         </div>
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-4xl font-extrabold text-gold" id="seconds">0</div>
-                            <div class="text-sm font-medium uppercase mt-2 text-gold">Segundos</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="seconds">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Segundos</div>
                         </div>
                     </div>
                 </section>
@@ -200,19 +204,19 @@
 
         <main class="container mx-auto max-w-4xl px-4 py-8">
             <section class="content-section text-center py-8 px-4 rounded-lg shadow-lg mb-8 elegant-border">
-                <h2 class="ny-title text-4xl font-bold mb-4 tracking-wide">
-                    ¡Hola!, <span id="guestName" class="text-4xl md:text-5xl font-serif italic leading-tight"></span>
+                <h2 class="ny-title text-3xl sm:text-4xl font-bold mb-4 tracking-wide">
+                    ¡Hola!, <span id="guestName" class="text-3xl sm:text-4xl md:text-5xl font-serif italic leading-tight"></span>
                 </h2>
-                <p class="ny-text text-lg mb-4 font-medium">
+                <p class="ny-text text-base sm:text-lg mb-4 font-medium">
                     Invitación para: <span id="guestCount" class="font-semibold"></span>
                 </p>
             </section>
 
-            <section id="event-info" class="content-section rounded-lg shadow-md p-9 mb-8 elegant-border">
-                <h2 class="ny-title text-2xl font-semibold mb-4">Información del Evento</h2>
+            <section id="event-info" class="content-section rounded-lg shadow-md p-6 sm:p-9 mb-8 elegant-border">
+                <h2 class="ny-title text-xl sm:text-2xl font-semibold mb-4">Información del Evento</h2>
                 <p class="ny-text mb-2">Fecha: <span id="event-date" class="font-medium">8 de Febrero</span></p>
                 <p class="ny-text mb-2">Hora: <span id="event-time" class="font-medium">21:00</span></p>
-                <p class="ny-text mb-2">Ubicación: <span class="font-medium font-bold">Belgrano Pje Neuquen, Lules, Tucumán.</span></p>
+                <p class="ny-text mb-2">Ubicación: <span class="font-medium font-bold">Belgrano y Pje Neuquen, Lules, Tucumán.</span></p>
                 <div class="flex justify-center mt-4">
                     <a href="https://maps.app.goo.gl/kb9J4isKUX3nLNwJ9" id="event-link" class="ny-text inline-flex items-center justify-center bg-black border border-gold text-gold font-semibold py-2 px-4 rounded-lg hover:bg-gold hover:text-black transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,15 +229,12 @@
             </section>
 
             <section class="dress-code-section rounded-lg shadow-md mb-8">
-                <div class="text-center mb-6">
-                    <h3 class="dress-code-title text-3xl mb-4"></h3>
-                    <p class="dress-code-subtitle"></p>
-                </div>
+                
                 <img src="assets/dress.png" alt="Dress Code" class="w-full h-auto rounded-lg">
             </section>
 
             <section class="content-section rounded-lg shadow-lg p-6 mb-8 text-center elegant-border">
-                <h3 class="ny-title text-2xl font-semibold mb-6">¡Tu presencia es importante!</h3>
+                <h3 class="ny-title text-xl sm:text-2xl font-semibold mb-6">¡Tu presencia es importante!</h3>
                 <p class="ny-text mb-6">Por favor, confirma tu asistencia así podemos prepararnos para recibirte.</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <div>
@@ -248,30 +249,30 @@
                 </div>
             </section>
 
-            <section class="content-section rounded-lg shadow-md p-9 mb-8 elegant-border">
+            <section class="content-section rounded-lg shadow-md p-6 sm:p-9 mb-8 elegant-border">
                 <div class="flex items-center justify-center mb-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gold mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 sm:h-12 sm:w-12 text-gold mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                     </svg>
-                    <h3 class="ny-title text-3xl font-semibold">Regalo</h3>
+                    <h3 class="ny-title text-2xl sm:text-3xl font-semibold">Regalo</h3>
                 </div>
-                <p class="ny-text text-lg mb-6 text-center">Si deseas hacerme un regalo, puedes realizarlo de las siguientes formas:</p>
+                <p class="ny-text text-base sm:text-lg mb-6 text-center">Si deseas hacerme un regalo, puedes realizarlo de las siguientes formas:</p>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-black rounded-lg p-6 border border-gold">
-                        <h4 class="ny-text text-xl font-semibold mb-3">Transferencia Bancaria</h4>
+                        <h4 class="ny-text text-lg sm:text-xl font-semibold mb-3">Transferencia Bancaria</h4>
                         <p class="ny-text">Alias: BEATRIZ.CUMPLE60</p>
                     </div>
                     <div class="bg-black rounded-lg p-6 border border-gold">
-                        <h4 class="ny-text text-xl font-semibold mb-3">En el salón</h4>
+                        <h4 class="ny-text text-lg sm:text-xl font-semibold mb-3">En el salón</h4>
                         <p class="ny-text">Habrá una urna disponible en el salón para quienes prefieran llevar su regalo en efectivo.</p>
                     </div>
                 </div>
             </section>
 
-            <section class="content-section rounded-lg shadow-lg p-8 mb-8 text-center elegant-border">
-                <h3 class="ny-title text-2xl font-semibold mb-6">Agendá la fecha</h3>
+            <section class="content-section rounded-lg shadow-lg p-6 sm:p-8 mb-8 text-center elegant-border">
+                <h3 class="ny-title text-xl sm:text-2xl font-semibold mb-6">Agendá la fecha</h3>
                 <p class="ny-text mb-6">No te olvides de este día tan especial. Agrégalo a tu calendario.</p>
-                <button id="calendarButton" class="bg-black text-gold px-8 py-3 rounded-lg hover:bg-gold hover:text-black transition-colors duration-300 flex items-center justify-center mx-auto border border-gold">
+                <button id="calendarButton" class="bg-black text-gold px-6 sm:px-8 py-3 rounded-lg hover:bg-gold hover:text-black transition-colors duration-300 flex items-center justify-center mx-auto border border-gold">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
                     </svg>
@@ -280,17 +281,17 @@
             </section>
         </main>
 
-        <footer class="text-gold py-12 px-4">
+        <footer class="text-gold py-8 sm:py-12 px-4">
             <div class="container mx-auto max-w-4xl text-center">
-                <div class="mb-8">
+                <div class="mb-6 sm:mb-8">
                    
                 </div>
-                <h3 class="ny-title text-4xl font-bold mb-6">Mis 60 Beatriz</h3>
-                <p class="ny-text text-xl mb-8">Gracias por ser parte de este día tan especial</p>
+                <h3 class="ny-title text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Mis 60 Beatriz</h3>
+                <p class="ny-text text-lg sm:text-xl mb-6 sm:mb-8">Gracias por ser parte de este día tan especial</p>
                 
-                <div class="mb-8">
-                    <p class="ny-text text-2xl font-semibold mb-2">Beatriz</p>
-                    <p class="ny-text text-lg">8 de Febrero, 2024</p>
+                <div class="mb-6 sm:mb-8">
+                    <p class="ny-text text-xl sm:text-2xl font-semibold mb-2">Beatriz</p>
+                    <p class="ny-text text-base sm:text-lg">8 de Febrero, 2024</p>
                 </div>
                 
                 <div class="border-t border-gold pt-6">
@@ -343,8 +344,8 @@
                 const eventTitle = encodeURIComponent('MIS 60 BEATRIZ');
                 const eventDetails = encodeURIComponent('Celebración de los 60 años de Beatriz');
                 const eventLocation = encodeURIComponent('Belgrano Pje Neuquen, Lules, Tucumán');
-                const startDate = '20240208T210000';
-                const endDate = '20240209T030000';
+                const startDate = '20250208T210000';
+                const endDate = '20250209T030000';
                 const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&details=${eventDetails}&location=${eventLocation}&dates=${startDate}/${endDate}`;
                 window.open(calendarUrl, '_blank');
             });
