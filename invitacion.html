@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación MIS 60 BEATRIZ</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-gold: #D4AF37;
@@ -33,7 +30,41 @@
             color: var(--color-gold);
         }
 
-        .gif-background {
+        .video-background {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-foreground,
+        .video-background video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .video-foreground {
+                height: 300%;
+                top: -100%;
+            }
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .video-foreground {
+                width: 300%;
+                left: -100%;
+            }
+        }
+
+        /* .gif-background {
             position: fixed;
             top: 0;
             left: 0;
@@ -47,7 +78,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.6;
-        }
+        } */
 
         .content-overlay {
             position: relative;
@@ -153,13 +184,39 @@
             background: linear-gradient(to bottom, rgba(26, 74, 26, 0.8), rgba(26, 74, 26, 0.95));
             border-top: 2px solid var(--color-gold);
         }
+
+        .fallback-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .video-foreground {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .video-loaded .video-foreground {
+            opacity: 1;
+        }
+
+        .video-loaded .fallback-image {
+            display: none;
+        }
     </style>
 </head>
 <body class="text-gray-800 font-sans w-full overflow-x-hidden">
-    <div class="gif-background">
-        <img src="assets/fig.gif" alt="Fondo animado">
+    <div class="video-background">
+        <img id="fallbackImage" src="assets/background-static.jpg" alt="Fondo estático" class="fallback-image">
+        <div class="video-foreground">
+            <video id="bgVideo" src="assets/video.mp4" muted playsinline></video>
+        </div>
     </div>
-    <div class="content-overlay">
+    <div class="content-overlay bg-black bg-opacity-60">
         <button id="musicToggle" class="fixed right-4 top-4 z-50 bg-black bg-opacity-75 text-gold rounded-full p-3 shadow-lg hover:bg-opacity-100 transition-all duration-300 border border-gold">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
@@ -216,7 +273,7 @@
                 <h2 class="ny-title text-xl sm:text-2xl font-semibold mb-4">Información del Evento</h2>
                 <p class="ny-text mb-2">Fecha: <span id="event-date" class="font-medium">8 de Febrero</span></p>
                 <p class="ny-text mb-2">Hora: <span id="event-time" class="font-medium">21:00</span></p>
-                <p class="ny-text mb-2">Ubicación: <span class="font-medium font-bold">Belgrano y Pje Neuquen, Lules, Tucumán.</span></p>
+                <p class="ny-text mb-2">Ubicación: <span class="font-medium font-bold">Belgrano Pje Neuquen, Lules, Tucumán.</span></p>
                 <div class="flex justify-center mt-4">
                     <a href="https://maps.app.goo.gl/kb9J4isKUX3nLNwJ9" id="event-link" class="ny-text inline-flex items-center justify-center bg-black border border-gold text-gold font-semibold py-2 px-4 rounded-lg hover:bg-gold hover:text-black transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -230,7 +287,14 @@
 
             <section class="dress-code-section rounded-lg shadow-md mb-8">
                 
-                <img src="assets/dress.png" alt="Dress Code" class="w-full h-auto rounded-lg">
+                <Image 
+                    src="/assets/dress.png" 
+                    alt="Dress Code" 
+                    width={600} 
+                    height={400} 
+                    layout="responsive"
+                    className="rounded-lg"
+                />
             </section>
 
             <section class="content-section rounded-lg shadow-lg p-6 mb-8 text-center elegant-border">
@@ -256,13 +320,9 @@
                     </svg>
                     <h3 class="ny-title text-2xl sm:text-3xl font-semibold">Regalo</h3>
                 </div>
-                <p class="ny-text text-base sm:text-lg mb-6 text-center">Si deseas hacerme un regalo, puedes realizarlo de las siguientes formas:</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-black rounded-lg p-6 border border-gold">
-                        <h4 class="ny-text text-lg sm:text-xl font-semibold mb-3">Transferencia Bancaria</h4>
-                        <p class="ny-text">Alias: BEATRIZ.CUMPLE60</p>
-                    </div>
-                    <div class="bg-black rounded-lg p-6 border border-gold">
+                <div class=" text-gold px-8 py-3 rounded-lg hover:bg-gold hover:text-black transition-colors duration-300 flex items-center justify-center ">
+                   
+                    <div class="">
                         <h4 class="ny-text text-lg sm:text-xl font-semibold mb-3">En el salón</h4>
                         <p class="ny-text">Habrá una urna disponible en el salón para quienes prefieran llevar su regalo en efectivo.</p>
                     </div>
@@ -301,14 +361,28 @@
         </footer>
     </div>
 
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" async></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name');
-            const guests = urlParams.get('guests');
-
-            document.getElementById('guestName').textContent = name || 'Invitado';
-            document.getElementById('guestCount').textContent = guests || '1 persona';
+            let guestData = [];
+            fetch('invitados.json')
+                .then(response => response.json())
+                .then(data => {
+                    guestData = data;
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const name = urlParams.get('name');
+                    const guest = guestData.find(g => g.name === name);
+                    if (guest) {
+                        document.getElementById('guestName').textContent = guest.name;
+                        document.getElementById('guestCount').textContent = guest.guests > 1 ? `${guest.guests} personas` : '1 persona';
+                    } else {
+                        document.getElementById('guestName').textContent = 'Invitado';
+                        document.getElementById('guestCount').textContent = '1 persona';
+                    }
+                })
+                .catch(error => console.error('Error loading guest data:', error));
 
             // Countdown timer
             const eventDate = new Date('2025-02-08T21:00:00');
@@ -332,10 +406,12 @@
             updateCountdown();
 
             // WhatsApp confirmation
-            const adultPhoneNumber = '5493813898303';
+            const adultPhoneNumber = '5493814688882';
 
             document.getElementById('confirmButtonAdults').addEventListener('click', () => {
-                const message = encodeURIComponent('¡Hola, Beatriz! Confirmo mi asistencia a tu cumpleaños número 60.');
+                const name = document.getElementById('guestName').textContent;
+                const guests = document.getElementById('guestCount').textContent;
+                const message = encodeURIComponent(`¡Hola, Beatriz! Soy ${name} y confirmo mi asistencia a tu cumpleaños. `);
                 window.open(`https://wa.me/${adultPhoneNumber}?text=${message}`, '_blank');
             });
 
@@ -344,8 +420,8 @@
                 const eventTitle = encodeURIComponent('MIS 60 BEATRIZ');
                 const eventDetails = encodeURIComponent('Celebración de los 60 años de Beatriz');
                 const eventLocation = encodeURIComponent('Belgrano Pje Neuquen, Lules, Tucumán');
-                const startDate = '20250208T210000';
-                const endDate = '20250209T030000';
+                const startDate = '20240208T210000';
+                const endDate = '20240209T030000';
                 const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&details=${eventDetails}&location=${eventLocation}&dates=${startDate}/${endDate}`;
                 window.open(calendarUrl, '_blank');
             });
@@ -356,6 +432,7 @@
                 src: ['assets/audio.mp3'],
                 loop: true,
                 volume: 0.5,
+                autoplay: true,
                 onplay: function() {
                     document.getElementById('musicToggle').classList.add('animate-pulse');
                 },
@@ -375,13 +452,54 @@
                     sound.play();
                 }
             });
-
-            document.body.addEventListener('click', function() {
-                if (!sound.playing()) {
-                    sound.play();
-                }
-            }, { once: true });
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.getElementById('bgVideo');
+            var fallbackImage = document.getElementById('fallbackImage');
+            var videoBackground = document.querySelector('.video-background');
+
+    function playVideo() {
+        video.play().then(function() {
+            console.log('Video reproduciendo correctamente');
+            videoBackground.classList.add('video-loaded');
+        }).catch(function(error) {
+            console.log("Error al reproducir el video:", error);
+        });
+    }
+
+    function checkVideoStatus() {
+        if (video.paused) {
+            console.log('El video está pausado, intentando reproducir...');
+            playVideo();
+        }
+    }
+
+    video.addEventListener('canplaythrough', function() {
+        console.log('Video listo para reproducirse');
+        playVideo();
+    });
+
+    video.addEventListener('ended', function() {
+        console.log('El video ha terminado, reiniciando...');
+        video.currentTime = 0;
+        playVideo();
+    });
+
+    video.addEventListener('error', function(e) {
+        console.error('Error al cargar el video:', e);
+        fallbackImage.style.display = 'block';
+    });
+
+    // Intenta reproducir el video cada 5 segundos si está pausado
+    setInterval(checkVideoStatus, 5000);
+
+    // Asegúrate de que el video se reproduzca cuando la página vuelva a estar visible
+    document.addEventListener("visibilitychange", function() {
+        if (!document.hidden) {
+            checkVideoStatus();
+        }
+    });
+});
     </script>
 </body>
 </html>
