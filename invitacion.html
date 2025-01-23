@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --color-gold: #D4AF37;
@@ -21,10 +22,6 @@
         
         body {
             background-color: var(--color-black);
-            background-size: 40px 40px;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
             font-family: 'Playfair Display', serif;
             color: var(--color-gold);
         }
@@ -46,42 +43,11 @@
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
             pointer-events: none;
         }
 
-        @media (min-aspect-ratio: 16/9) {
-            .video-foreground {
-                height: 300%;
-                top: -100%;
-            }
-        }
-
-        @media (max-aspect-ratio: 16/9) {
-            .video-foreground {
-                width: 300%;
-                left: -100%;
-            }
-        }
-
-        /* .gif-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .gif-background img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.6;
-        } */
-
         .content-overlay {
-            position: relative;
-            z-index: 1;
             background-color: rgba(0, 0, 0, 0.6);
             min-height: 100vh;
         }
@@ -90,15 +56,6 @@
             font-family: 'Great Vibes', cursive;
             color: var(--color-gold);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
-            font-size: 3rem;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .header-title {
-                font-size: 5rem;
-            }
         }
 
         .countdown-item {
@@ -118,11 +75,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
         }
 
-        .content-section:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-        }
-
         .ny-title {
             font-family: 'Cinzel', serif;
             color: var(--color-gold);
@@ -131,21 +83,7 @@
 
         .ny-text {
             color: var(--color-cream);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
-        }
-
-        button {
-            background-color: var(--color-black);
-            color: var(--color-gold);
-            border: 1px solid var(--color-gold);
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background-color: var(--color-gold);
-            color: var(--color-black);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-gold-light);
         }
 
         .elegant-border {
@@ -156,32 +94,6 @@
         .dress-code-section {
             background: linear-gradient(to bottom, rgba(26, 74, 26, 0.9), rgba(26, 74, 26, 0.7));
             border: 2px solid var(--color-gold);
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .dress-code-section:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-        }
-
-        .dress-code-title {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            color: var(--color-gold);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .dress-code-subtitle {
-            font-family: 'Great Vibes', cursive;
-            color: var(--color-gold);
-            font-size: 2.5rem;
-        }
-
-        footer {
-            background: linear-gradient(to bottom, rgba(26, 74, 26, 0.8), rgba(26, 74, 26, 0.95));
-            border-top: 2px solid var(--color-gold);
         }
 
         .fallback-image {
@@ -215,43 +127,35 @@
             <video id="bgVideo" src="assets/video.mp4" muted playsinline></video>
         </div>
     </div>
-    <div class="content-overlay bg-black bg-opacity-60">
-        <button id="musicToggle" class="fixed right-4 top-4 z-50 bg-black bg-opacity-75 text-gold rounded-full p-3 shadow-lg hover:bg-opacity-100 transition-all duration-300 border border-gold">
+    <div class="content-overlay">
+        <button id="musicToggle" class="fixed right-4 top-4 z-50 bg-black bg-opacity-75 text-gold rounded-full p-3 shadow-lg hover:bg-opacity-100 transition-all duration-300 border border-gold" aria-label="Alternar música">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
             </svg>
         </button>
 
-        <audio id="backgroundMusic" loop>
-            <source src="assets/audio.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-
         <header class="w-full min-h-screen flex items-center justify-center px-4">
             <div class="text-center">
-                <div class="mb-8">
-                    
-                </div>
-                <h1 class="header-title">
+                <h1 class="header-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8">
                     Mis 60 <br> Beatriz
                 </h1>
                 <section id="countdown" class="mb-8">
                     <div id="countdown-timer" class="grid grid-cols-2 sm:flex sm:flex-row justify-center gap-4">
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="days">0</div>
-                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Días</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold" id="days">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2">Días</div>
                         </div>
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="hours">0</div>
-                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Horas</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold" id="hours">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2">Horas</div>
                         </div>
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="minutes">0</div>
-                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Minutos</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold" id="minutes">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2">Minutos</div>
                         </div>
                         <div class="countdown-item flex flex-col items-center rounded-lg p-4">
-                            <div class="text-3xl sm:text-4xl font-extrabold text-gold" id="seconds">0</div>
-                            <div class="text-xs sm:text-sm font-medium uppercase mt-2 text-gold">Segundos</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold" id="seconds">0</div>
+                            <div class="text-xs sm:text-sm font-medium uppercase mt-2">Segundos</div>
                         </div>
                     </div>
                 </section>
@@ -284,16 +188,8 @@
                 </div>
             </section>
 
-            <section class="dress-code-section rounded-lg shadow-md mb-8">
-                
-                <Image 
-                    src="/assets/dress.png" 
-                    alt="Dress Code" 
-                    width={600} 
-                    height={400} 
-                    layout="responsive"
-                    className="rounded-lg"
-                />
+            <section class="dress-code-section rounded-lg shadow-md mb-8 p-4">
+                <img src="assets/dress.png" alt="Dress Code" class="w-full h-auto rounded-lg" loading="lazy">
             </section>
 
             <section class="content-section rounded-lg shadow-lg p-6 mb-8 text-center elegant-border">
@@ -319,8 +215,7 @@
                     </svg>
                     <h3 class="ny-title text-2xl sm:text-3xl font-semibold">Regalo</h3>
                 </div>
-                <div class=" text-gold px-8 py-3 rounded-lg hover:bg-gold hover:text-black transition-colors duration-300 flex items-center justify-center ">
-                   
+                <div class="text-gold px-8 py-3 rounded-lg hover:bg-gold hover:text-black transition-colors duration-300 flex items-center justify-center">
                     <div class="">
                         <h4 class="ny-text text-lg sm:text-xl font-semibold mb-3">En el salón</h4>
                         <p class="ny-text">Habrá una urna disponible en el salón para quienes prefieran llevar su regalo en efectivo.</p>
@@ -342,27 +237,17 @@
 
         <footer class="text-gold py-8 sm:py-12 px-4">
             <div class="container mx-auto max-w-4xl text-center">
-                <div class="mb-6 sm:mb-8">
-                   
-                </div>
                 <h3 class="ny-title text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Mis 60 Beatriz</h3>
                 <p class="ny-text text-lg sm:text-xl mb-6 sm:mb-8">Gracias por ser parte de este día tan especial</p>
-                
                 <div class="mb-6 sm:mb-8">
                     <p class="ny-text text-xl sm:text-2xl font-semibold mb-2">Beatriz</p>
                     <p class="ny-text text-base sm:text-lg">8 de Febrero, 2024</p>
                 </div>
-                
-                <div class="border-t border-gold pt-6">
-                    
-                </div>
+                <div class="border-t border-gold pt-6"></div>
             </div>
         </footer>
     </div>
 
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" async></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             let guestData = [];
@@ -424,82 +309,64 @@
                 const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&details=${eventDetails}&location=${eventLocation}&dates=${startDate}/${endDate}`;
                 window.open(calendarUrl, '_blank');
             });
-        });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var sound = new Howl({
-                src: ['assets/audio.mp3'],
-                loop: true,
-                volume: 0.5,
-                autoplay: true,
-                onplay: function() {
-                    document.getElementById('musicToggle').classList.add('animate-pulse');
-                },
-                onpause: function() {
-                    document.getElementById('musicToggle').classList.remove('animate-pulse');
-                },
-                onstop: function() {
-                    document.getElementById('musicToggle').classList.remove('animate-pulse');
+            // Background music
+            const musicToggle = document.getElementById('musicToggle');
+            let audio = null;
+
+            musicToggle.addEventListener('click', () => {
+                if (audio === null) {
+                    audio = new Audio('assets/audio.mp3');
+                    audio.loop = true;
+                    audio.volume = 0.5;
                 }
-            });
 
-            var musicToggle = document.getElementById('musicToggle');
-            musicToggle.addEventListener('click', function() {
-                if (sound.playing()) {
-                    sound.pause();
+                if (audio.paused) {
+                    audio.play();
+                    musicToggle.classList.add('animate-pulse');
                 } else {
-                    sound.play();
+                    audio.pause();
+                    musicToggle.classList.remove('animate-pulse');
+                }
+            });
+
+            // Video background
+            const video = document.getElementById('bgVideo');
+            const fallbackImage = document.getElementById('fallbackImage');
+            const videoBackground = document.querySelector('.video-background');
+
+            function playVideo() {
+                video.play().then(() => {
+                    console.log('Video reproduciendo correctamente');
+                    videoBackground.classList.add('video-loaded');
+                }).catch((error) => {
+                    console.log("Error al reproducir el video:", error);
+                    fallbackImage.style.display = 'block';
+                });
+            }
+
+            function checkVideoStatus() {
+                if (video.paused) {
+                    console.log('El video está pausado, intentando reproducir...');
+                    playVideo();
+                }
+            }
+
+            video.addEventListener('canplaythrough', playVideo);
+            video.addEventListener('ended', () => {
+                console.log('El video ha terminado, reiniciando...');
+                video.currentTime = 0;
+                playVideo();
+            });
+
+            setInterval(checkVideoStatus, 5000);
+
+            document.addEventListener("visibilitychange", () => {
+                if (!document.hidden) {
+                    checkVideoStatus();
                 }
             });
         });
-        document.addEventListener('DOMContentLoaded', function() {
-            var video = document.getElementById('bgVideo');
-            var fallbackImage = document.getElementById('fallbackImage');
-            var videoBackground = document.querySelector('.video-background');
-
-    function playVideo() {
-        video.play().then(function() {
-            console.log('Video reproduciendo correctamente');
-            videoBackground.classList.add('video-loaded');
-        }).catch(function(error) {
-            console.log("Error al reproducir el video:", error);
-        });
-    }
-
-    function checkVideoStatus() {
-        if (video.paused) {
-            console.log('El video está pausado, intentando reproducir...');
-            playVideo();
-        }
-    }
-
-    video.addEventListener('canplaythrough', function() {
-        console.log('Video listo para reproducirse');
-        playVideo();
-    });
-
-    video.addEventListener('ended', function() {
-        console.log('El video ha terminado, reiniciando...');
-        video.currentTime = 0;
-        playVideo();
-    });
-
-    video.addEventListener('error', function(e) {
-        console.error('Error al cargar el video:', e);
-        fallbackImage.style.display = 'block';
-    });
-
-    // Intenta reproducir el video cada 5 segundos si está pausado
-    setInterval(checkVideoStatus, 5000);
-
-    // Asegúrate de que el video se reproduzca cuando la página vuelva a estar visible
-    document.addEventListener("visibilitychange", function() {
-        if (!document.hidden) {
-            checkVideoStatus();
-        }
-    });
-});
     </script>
 </body>
 </html>
-
